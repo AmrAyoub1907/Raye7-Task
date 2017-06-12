@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -12,19 +21,21 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="56dp"
         android:elevation="4dp"
         >
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?android:attr/actionBarSize"
-            app:theme="@style/Raye7" >
+            android:layout_height="56dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            >
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:layout_gravity="center"
                 android:src="@drawable/raye7"/>
         </android.support.v7.widget.Toolbar>
@@ -126,7 +137,7 @@
                 android:layout_weight="1"
                 android:text="Take my car"
                 android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginRight="8dp"
                 android:textColor="#ffffff"
                 android:background="@drawable/rectangle_buttons_nd"/>
             <Button
@@ -136,11 +147,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Request a Pickup"
-                android:layout_marginLeft="16dp"
+                android:layout_marginLeft="8dp"
                 android:layout_marginRight="16dp"
                 android:textColor="@color/primary"
                 android:background="@drawable/rectangle_buttons"/>
         </LinearLayout>
     </FrameLayout>
 </LinearLayout>
+<android.support.design.widget.NavigationView
+android:id="@+id/nav_view"
+android:layout_width="wrap_content"
+android:layout_height="match_parent"
+android:layout_gravity="start"
+android:fitsSystemWindows="true" />
+</android.support.v4.widget.DrawerLayout>
 
