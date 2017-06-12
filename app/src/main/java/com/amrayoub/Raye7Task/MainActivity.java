@@ -513,6 +513,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerPoints[1],15));
         mMap.animateCamera(CameraUpdateFactory.zoomIn());
+        tripInfo.setSource(markerPoints[0]);
+        tripInfo.setDestination(markerPoints[1]);
+
 
     }
     public boolean checkLocationPermission() {
