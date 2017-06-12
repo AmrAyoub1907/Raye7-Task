@@ -173,12 +173,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     public void onSuccess(Location location) {
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
+
                             mFrom_to = 0;
                             lat = location.getLatitude();
                             lng = location.getLongitude();
                             LatLng source = new LatLng(lat, lng);
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(source,10));
+                            mMap.animateCamera(CameraUpdateFactory.zoomIn());
                             latlng_adderssURL(source);
                             checkmarkers(source);
+
                         }
                     }
                 });
@@ -186,9 +190,12 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
     @Override
     public void onMapLongClick(LatLng latLng) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,10));
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
         mFrom_to = 1;
         latlng_adderssURL(latLng);
         checkmarkers(latLng);
+
         /*dest_lat = latLng.latitude;
         dest_lng = latLng.longitude;
         mMap.addMarker(new MarkerOptions()
@@ -504,15 +511,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .position(markerPoints[0])
                 .title("Source")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerPoints[0],15));
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
-
         markers[1]=mMap.addMarker(new MarkerOptions()
                 .position(markerPoints[1])
                 .title("Destination")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerPoints[1],15));
-        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
         tripInfo.setSource(markerPoints[0]);
         tripInfo.setDestination(markerPoints[1]);
 
