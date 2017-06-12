@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     Marker[] markers = new Marker[2];
     TripInfo tripInfo = new TripInfo();
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    public static final int REQUEST_LOCATION = 100;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(myToolbar);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, myToolbar,0, 0);
+                this, drawer, myToolbar, 0, 0);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
@@ -154,6 +156,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         Toast.makeText(this, "MyLocation button clicked", Toast.LENGTH_SHORT).show();
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Check Permissions Now
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION);
+        } else {
+            // permission has been granted, continue as usual
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        }
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mFusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -165,11 +177,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             lat = location.getLatitude();
                             lng = location.getLongitude();
                             LatLng source = new LatLng(lat, lng);
-                            /*mMap.addMarker(new MarkerOptions()
-                                    .position(source)
-                                    .title("Source")
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLng(source));*/
                             latlng_adderssURL(source);
                             checkmarkers(source);
                         }
@@ -497,12 +504,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 .position(markerPoints[0])
                 .title("Source")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(markerPoints[0]));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerPoints[0],15));
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
         markers[1]=mMap.addMarker(new MarkerOptions()
                 .position(markerPoints[1])
                 .title("Destination")
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(markerPoints[1]));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(markerPoints[1],15));
+        mMap.animateCamera(CameraUpdateFactory.zoomIn());
+
     }
     public boolean checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this,
@@ -546,6 +557,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     if (ActivityCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                         mMap.setMyLocationEnabled(true);
+                        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
                     }
                 } else {
                     // permission denied, boo! Disable the
