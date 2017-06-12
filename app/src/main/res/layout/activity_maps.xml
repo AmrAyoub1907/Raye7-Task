@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.amrayoub.Raye7Task.MainActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="4dp"
+        >
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:theme="@style/Raye7" >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_gravity="center"
+                android:src="@drawable/raye7"/>
+        </android.support.v7.widget.Toolbar>
+    </android.support.design.widget.AppBarLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="com.amrayoub.raye7task.MainActivity" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@drawable/backgroundalpha"
+            android:elevation="4dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="56dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/destination_from"
+                        android:text="From"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+
+                        android:gravity="center|start"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <EditText
+                        android:id="@+id/source_edittext"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:layout_weight="4"
+                        android:layout_height="match_parent"
+                        android:layout_width="0dp"
+                        android:singleLine = "true"
+                        android:imeOptions="actionDone"
+                        android:background="@drawable/edittext_shape"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_weight="1"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="56dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/destination_to"
+                        android:text="To"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:gravity="center|start"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent" />
+                    <EditText
+                        android:id="@+id/dest_edittext"
+                        android:singleLine = "true"
+                        android:paddingStart="10dp"
+                        android:paddingEnd="10dp"
+                        android:layout_weight="4"
+                        android:layout_width="0dp"
+                        android:imeOptions="actionDone"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/edittext_shape"/>
+                </LinearLayout>
+
+            </LinearLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center|end"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/ic_import_export_black_24dp"/>
+        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginBottom="12dp"
+            android:layout_gravity="bottom">
+            <Button
+                android:elevation="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Take my car"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="#ffffff"
+                android:background="@drawable/rectangle_buttons_nd"/>
+            <Button
+                android:elevation="2dp"
+                android:onClick="Request_a_pickup"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Request a Pickup"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/primary"
+                android:background="@drawable/rectangle_buttons"/>
+        </LinearLayout>
+    </FrameLayout>
+</LinearLayout>
+
